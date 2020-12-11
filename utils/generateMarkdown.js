@@ -67,23 +67,23 @@ const generateMarkdown = (data) => {
   }
 
   if (!data.title) data.title = 'Untitled';
-  
+
   toWrite = 
-`#${data.title.toTitleCase()} \n
+`# ${data.title.toTitleCase()} \n
 ${data.desc ? data.desc.toSentence() : ``}\n
-${data.desc ? `###Notes\n
+${data.desc ? `### Notes\n
 * ${data.notes.toSentence()}\n` : ``}
-${data.visuals ? `###Visuals
+${data.visuals ? `### Visuals
 ![${data.title}](${data.visuals})` : ``}
-###Properties
+### Properties \n
 ${listProps()}
-###Link to the Repository
+### Link to the Repository \n
 Link to the [GitHub repository](https://github.com/${data.username}/${data.title.replace(' ', '-')}).
-###Deployed Website
+### Deployed Website \n
 [The deployed site](https://${data.username.toLowerCase()}.github.io/${data.title.replace(' ', '-')}/), hosted by GitHub Pages.
-###Authors and Aknowledgement
+### Authors and Aknowledgement \n
 This project was created entirely by [${data.username}](https://github.com/${data.username}).
-###License \n
+### License \n
 ${data.license !== 'None' ? `This project is covered by the [${data.license}](License) license.` : `This project has no license.`}`
 
 
@@ -91,7 +91,7 @@ ${data.license !== 'None' ? `This project is covered by the [${data.license}](Li
     if (error) console.warn(error);
     console.log(data);
   });
-  return `#${data.title}`;
+  return `# ${data.title}`;
 }
 
 module.exports = generateMarkdown;
