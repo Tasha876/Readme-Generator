@@ -73,18 +73,34 @@ const generateMarkdown = (data) => {
   toWrite = 
 `# ${data.title.toTitleCase()} \n
 ${data.desc ? data.desc.toSentence() : ``}\n
-${data.desc ? `### ${i++}. Notes\n
+### Table of Contents
+${data.notes ? `1. [ Notes ](#Notes)` : ``}
+${data.visuals ? `1.  [ Visuals ](#Visuals)` : ``}
+${data.properties ? `1.  [ Properties ](#Properties)` : ``}
+1. [ Link to Repository ](#Link)
+1. [ Deployed Website ](#Site)
+1. [ Authors and Aknowledgement ](#Authors)
+1. [ License ](#License)
+
+<a name="Notes"></a>
+${data.notes ? `### ${i++}. Notes\n
 * ${data.notes.toSentence()}\n` : ``}
-${data.visuals ? `### ${i++}. Visuals
+<a name="Visuals"></a>
+${data.visuals ? `### ${i++}. Visuals\n
 ![${data.title}](${data.visuals})` : ``}
+<a name="Properties"></a>
 ### ${i++}. Properties \n
 ${listProps()}
+<a name="Link"></a>
 ### ${i++}. Link to the Repository \n
+<a name="Site"></a>
 Link to the [GitHub repository](https://github.com/${data.username}/${data.title.replace(' ', '-')}).
 ### ${i++}. Deployed Website \n
 [The deployed site](https://${data.username.toLowerCase()}.github.io/${data.title.replace(' ', '-')}/), hosted by GitHub Pages.
+<a name="Authors"></a>
 ### ${i++}. Authors and Aknowledgement \n
 This project was created entirely by [${data.username}](https://github.com/${data.username}).
+<a name="License"></a>
 ### ${i++}. License \n
 ${data.license !== 'None' ? `This project is covered by the [${data.license}](License) license.` : `This project has no license.`}`
 
