@@ -73,35 +73,47 @@ const generateMarkdown = (data) => {
   toWrite = 
 `# ${data.title.toTitleCase()} \n
 ${data.desc ? data.desc.toSentence() : ``}\n
-### Table of Contents
-${data.notes ? `1. [ Notes ](#Notes)` : ``}
+## Table of Contents
+${data.install ? `1. [ Install ](#Install)` : ``}
+${data.usage ? `1. [ Usage ](#Usage)` : ``}
 ${data.visuals ? `1.  [ Visuals ](#Visuals)` : ``}
 ${data.properties ? `1.  [ Properties ](#Properties)` : ``}
 1. [ Link to Repository ](#Link)
 1. [ Deployed Website ](#Site)
+${data.tests ? `1.  [ Tests ](#Tests)` : ``}
 1. [ Authors and Aknowledgement ](#Authors)
+1. [ Questions ](#Questions)
 1. [ License ](#License)
 
-<a name="Notes"></a>
-${data.notes ? `### ${i++}. Notes\n
-* ${data.notes.toSentence()}\n` : ``}
+<a name="Install"></a>
+${data.install ? `## ${i++}. Install\n
+* ${data.install.toSentence()}\n` : ``}
+<a name="Usage"></a>
+${data.usage ? `## ${i++}. Usage\n
+* ${data.usage.toSentence()}\n` : ``}
 <a name="Visuals"></a>
-${data.visuals ? `### ${i++}. Visuals\n
+${data.visuals ? `## ${i++}. Visuals\n
 ![${data.title}](${data.visuals})` : ``}
 <a name="Properties"></a>
-### ${i++}. Properties \n
+## ${i++}. Properties \n
 ${listProps()}
 <a name="Link"></a>
-### ${i++}. Link to the Repository \n
+## ${i++}. Link to the Repository \n
 <a name="Site"></a>
 Link to the [GitHub repository](https://github.com/${data.username}/${data.title.replace(' ', '-')}).
-### ${i++}. Deployed Website \n
+## ${i++}. Deployed Website \n
 [The deployed site](https://${data.username.toLowerCase()}.github.io/${data.title.replace(' ', '-')}/), hosted by GitHub Pages.
+<a name="Tests"></a>
+${data.tests ? `## ${i++}. Tests\n
+* ${data.tests.toSentence()}\n` : ``}
 <a name="Authors"></a>
-### ${i++}. Authors and Aknowledgement \n
+## ${i++}. Authors and Aknowledgement \n
 This project was created entirely by [${data.username}](https://github.com/${data.username}).
+<a name="Questions"></a>
+## ${i++}. Questions \n
+Please direct all questions and inquiries to <${data.email}>.\n
 <a name="License"></a>
-### ${i++}. License \n
+## ${i++}. License \n
 ${data.license !== 'None' ? `This project is covered by the [${data.license}](License) license.` : `This project has no license.`}`
 
 

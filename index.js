@@ -21,18 +21,42 @@ const questions = [
 },
 {
     type: 'input',
-    message: 'Add any brief notes you think the user should know.',
-    name: 'notes',
+    message: 'How does the user install your project?',
+    name: 'install',
 },
 {
-    message: 'Any visuals, please add.',
-    name: 'visuals',
+  type: 'input',
+  message: 'How does the user use your project?',
+  name: 'usage',
 },
 {
-    type: 'list',
-    message: 'Any license? Which one?',
-    name: 'license',
-    choices: ['MIT', 'None'],
+  type: 'input',
+  message: 'Any example tests?',
+  name: 'tests',
+},
+{
+  type: 'input',
+  message: 'Any visuals, please add?',
+  name: 'visuals',
+},
+{
+  type: 'list',
+  message: 'Any license? Which one?',
+  name: 'license',
+  choices: ['MIT', 'None'],
+},
+{
+  type: 'input',
+  message: 'Enter your email address?',
+  name: 'email',
+
+  validate: async (input) => {
+    let regex = /(^((\w+-)*\w+(\.(\w+-)*\w+)*@(\w+-)*\w+(\.([A-Za-z]{2,4})){1,4})$)/;
+    if (!regex.test(input)) {
+       return 'Please enter a valid email address.';
+    }
+    return true;
+  }
 },
 {
     type: 'input',
@@ -40,7 +64,6 @@ const questions = [
     loop: true,
 }]
     
-
 // import inquirer from 'inquirer';
 
 const repeatQuestion = async (inputs = []) => {
@@ -62,15 +85,15 @@ const repeatQuestion = async (inputs = []) => {
   (newInputs = inputs, newInputs);
 };
 
-const questionSix = async (question) => {
+const questionRepeat = async (question) => {
   const input = question.loop ? await repeatQuestion() : inquirer.prompt(question);
 //   console.log(input);
   return input;
 };
 
 const init = async () => {
-const prompts = await inquirer.prompt(questions.slice(0, 6))
-const answers = await questionSix(questions[6]);
+const prompts = await inquirer.prompt(questions.slice(0, 9))
+const answers = await questionRepeat(questions[9]);
 prompts['properties'] = answers;
 generateMarkdown(prompts);
 }
