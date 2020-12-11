@@ -52,6 +52,8 @@ const generateLicense = (type) => {
 
 // function to generate markdown for README
 const generateMarkdown = (data) => {
+  
+  let i = 1;
 
   fs.writeFile('License', generateLicense(data.license),(error) => {
     if (error) console.warn(error);
@@ -71,19 +73,19 @@ const generateMarkdown = (data) => {
   toWrite = 
 `# ${data.title.toTitleCase()} \n
 ${data.desc ? data.desc.toSentence() : ``}\n
-${data.desc ? `### Notes\n
+${data.desc ? `### ${i++}. Notes\n
 * ${data.notes.toSentence()}\n` : ``}
-${data.visuals ? `### Visuals
+${data.visuals ? `### ${i++}. Visuals
 ![${data.title}](${data.visuals})` : ``}
-### Properties \n
+### ${i++}. Properties \n
 ${listProps()}
-### Link to the Repository \n
+### ${i++}. Link to the Repository \n
 Link to the [GitHub repository](https://github.com/${data.username}/${data.title.replace(' ', '-')}).
-### Deployed Website \n
+### ${i++}. Deployed Website \n
 [The deployed site](https://${data.username.toLowerCase()}.github.io/${data.title.replace(' ', '-')}/), hosted by GitHub Pages.
-### Authors and Aknowledgement \n
+### ${i++}. Authors and Aknowledgement \n
 This project was created entirely by [${data.username}](https://github.com/${data.username}).
-### License \n
+### ${i++}. License \n
 ${data.license !== 'None' ? `This project is covered by the [${data.license}](License) license.` : `This project has no license.`}`
 
 
@@ -91,7 +93,7 @@ ${data.license !== 'None' ? `This project is covered by the [${data.license}](Li
     if (error) console.warn(error);
     console.log(data);
   });
-  return `# ${data.title}`;
+  //return `# ${data.title}`;
 }
 
 module.exports = generateMarkdown;

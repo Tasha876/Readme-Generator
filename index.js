@@ -36,7 +36,6 @@ const questions = [
 },
 {
     type: 'input',
-    message: 'What is *one* function of your project? You\'ll be prompted for more If you are done, just press enter',
     name: 'property',
     loop: true,
 }]
@@ -48,7 +47,7 @@ const repeatQuestion = async (inputs = []) => {
   const prompts = [
     {
         type: 'input',
-        message: 'What is *one* function of your project? If you are done, just press enter',
+        message: 'What is *one* function of your project? You\'ll be prompted for more If you are done, just press enter',
         name: 'property',
         loop: true,
     },

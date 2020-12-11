@@ -1,24 +1,21 @@
-# Untitled 
+# Readme Generator 
 
 
 
 
-### Visuals
-![Untitled](puzzle.png)
-### Properties 
 
-* It's cool.
-* It does stuff.
+### 1. Properties 
 
-### Link to the Repository 
+Guess my project does nothing.
+### 2. Link to the Repository 
 
-Link to the [GitHub repository](https://github.com//Untitled).
-### Deployed Website 
+Link to the [GitHub repository](https://github.com/Tasha876/readme-generator).
+### 3. Deployed Website 
 
-[The deployed site](https://.github.io/Untitled/), hosted by GitHub Pages.
-### Authors and Aknowledgement 
+[The deployed site](https://tasha876.github.io/readme-generator/), hosted by GitHub Pages.
+### 4. Authors and Aknowledgement 
 
-This project was created entirely by [](https://github.com/).
-### License 
+This project was created entirely by [Tasha876](https://github.com/Tasha876).
+### 5. License 
 
 This project is covered by the [MIT](License) license.
