@@ -20,34 +20,22 @@ String.prototype.toSentence = function() {
 
 
 const generateLicense = (type) => {
-  let license = "";
+  let badge = '';
   switch(type) {
     // I only really know about the MIT licese right now, also the other ones were way too long
-    case 'MIT':
-      license = `MIT License
-
-      Copyright (c) 2020 Tasha876
-      
-      Permission is hereby granted, free of charge, to any person obtaining a copy
-      of this software and associated documentation files (the "Software"), to deal
-      in the Software without restriction, including without limitation the rights
-      to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-      copies of the Software, and to permit persons to whom the Software is
-      furnished to do so, subject to the following conditions:
-      
-      The above copyright notice and this permission notice shall be included in all
-      copies or substantial portions of the Software.
-      
-      THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-      IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-      FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-      AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-      LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-      OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-      SOFTWARE.
-      `;
+    case 'GLPv2':
+      badge = `[![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)`;
       break;
-  } return license;
+    case 'GPLv3':
+      badge = `[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)`;
+      break;
+    case 'MIT':
+      badge = `[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)`;
+      break;
+    case 'Apache':
+      badge = `[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)`;
+      break;
+  } return badge;
 }
 
 // function to generate markdown for README
@@ -55,17 +43,11 @@ const generateMarkdown = (data) => {
   
   let i = 1;
 
-  fs.writeFile('License', generateLicense(data.license),(error) => {
-    if (error) console.warn(error);
-    console.log(data);
-  });
-
-
   const listProps = () => {
     let props = "";
     for (property of data.properties) {
       props += '* ' + property.toSentence() + '\n';
-    }; return props ? props : "Guess my project does nothing.";
+    }; return props ? props : "None at the moment.";
   }
 
   if (!data.title) data.title = 'Untitled';
@@ -73,6 +55,7 @@ const generateMarkdown = (data) => {
   toWrite = 
 `# ${data.title.toTitleCase()} \n
 ${data.desc ? data.desc.toSentence() : ``}\n
+${generateLicense(data.license)}\n
 ## Table of Contents
 ${data.install ? `1. [ Install ](#Install)` : ``}
 ${data.usage ? `1. [ Usage ](#Usage)` : ``}
@@ -87,10 +70,10 @@ ${data.tests ? `1.  [ Tests ](#Tests)` : ``}
 
 <a name="Install"></a>
 ${data.install ? `## ${i++}. Install\n
-* ${data.install.toSentence()}\n` : ``}
+${data.install.toSentence()}\n` : ``}
 <a name="Usage"></a>
 ${data.usage ? `## ${i++}. Usage\n
-* ${data.usage.toSentence()}\n` : ``}
+${data.usage.toSentence()}\n` : ``}
 <a name="Visuals"></a>
 ${data.visuals ? `## ${i++}. Visuals\n
 ![${data.title}](${data.visuals})` : ``}
@@ -117,7 +100,7 @@ Please direct all questions and inquiries to <${data.email}>.\n
 ${data.license !== 'None' ? `This project is covered by the [${data.license}](License) license.` : `This project has no license.`}`
 
 
-  fs.writeFile('./readme.md', toWrite, (error) => {
+  fs.writeFile('generated_files/README.md', toWrite, (error) => {
     if (error) console.warn(error);
     console.log(data);
   });

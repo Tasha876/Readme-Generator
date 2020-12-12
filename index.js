@@ -1,5 +1,4 @@
 const inquirer = require('inquirer');
-const { title } = require('process');
 const generateMarkdown = require('./utils/generateMarkdown');
 
 // array of questions for user
@@ -43,7 +42,7 @@ const questions = [
   type: 'list',
   message: 'Any license? Which one?',
   name: 'license',
-  choices: ['MIT', 'None'],
+  choices: ['MIT', 'GPLv3', 'GPLv2', 'Apache'],
 },
 {
   type: 'input',
@@ -70,14 +69,13 @@ const repeatQuestion = async (inputs = []) => {
   const prompts = [
     {
         type: 'input',
-        message: 'What is *one* function of your project? You\'ll be prompted for more If you are done, just press enter',
+        message: 'What is *one* function of your project? You\'ll be prompted for more. If you are done, just press enter',
         name: 'property',
         loop: true,
     },
   ];
 
   const input = await inquirer.prompt(prompts);
-//   console.log(input)
   let newInputs = [];
 
   // if there is a new property, add it to newInputs and keep looping, else just set newInputs to whats in inputs and return;
@@ -87,7 +85,6 @@ const repeatQuestion = async (inputs = []) => {
 
 const questionRepeat = async (question) => {
   const input = question.loop ? await repeatQuestion() : inquirer.prompt(question);
-//   console.log(input);
   return input;
 };
 
